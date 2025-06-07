@@ -40,6 +40,12 @@ Os thresholds de cada camada são **ajustados automaticamente** para maximizar a
 
 ---
 
+## Limitações
+
+- Não recomendado para relações altamente não-lineares.
+- GridSearch pode ser custoso para muitos features/camadas/thresholds.
+- Melhor desempenho em problemas interpretáveis, datasets pequenos/médios ou prototipagem rápida.
+
 ## Instalação
 
 Basta copiar o arquivo `learnable_sieve.py` para o seu projeto Python.  
