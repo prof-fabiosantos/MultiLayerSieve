@@ -31,15 +31,6 @@ Os thresholds de cada camada são **ajustados automaticamente** para maximizar a
 
 ---
 
-## Exemplos de Aplicação
-
-* **Inspeção industrial:** Classificação de peças ou produtos por características medidas.
-* **Pré-triagem médica:** Separação de pacientes em níveis de urgência com base em exames simples.
-* **Análise de crédito:** Segmentação por faixas de renda, score, idade, etc.
-* **Agronegócio:** Classificação de alimentos por peso, tamanho ou teor de umidade.
-
----
-
 ## Justificativa e Aplicações
 
 Embora exista uma grande variedade de algoritmos supervisionados para problemas lineares, como Regressão Logística, SVM linear, LDA e outros, o **MultiLayer Sieve** se destaca por sua proposta centrada em interpretabilidade, transparência e aderência a processos de decisão já praticados em ambientes industriais, médicos e corporativos.
@@ -142,9 +133,9 @@ if 'classe_verdadeira' in df_teste.columns:
 
 ## Estrutura dos arquivos
 
-* `learnable_sieve.py` — Implementação do classificador MultiLayer Sieve.
-* `TrainMultiLayerSieve.py` — Exemplo de script de treinamento.
-* `TestMultiLayerSieve.py` — Exemplo de script de teste/avaliação.
+* `MultiLayerSieve.py` — Implementação do classificador MultiLayer Sieve.
+* `Train.py` — Exemplo de script de treinamento.
+* `Test.py` — Exemplo de script de teste/avaliação.
 * `treino.csv`, `teste.csv` — Dados de exemplo (colunas: features numéricas + classe).
 
 ---
