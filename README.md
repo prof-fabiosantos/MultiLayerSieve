@@ -2,6 +2,9 @@
 
 > Um classificador supervisionado inspirado em peneiras multicamadas, com thresholds aprendíveis e alta interpretabilidade.
 
+<p align="center">
+  <img src="./logo.png" alt="Logo Transformer Core" width="300"/>
+</p>
 ---
 
 ## Visão Geral
