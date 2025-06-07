@@ -10,7 +10,7 @@ y = df['classe'].values
 clf = MultiLayerSieve(
     n_layers=2,
     feature_names=['comprimento', 'largura', 'peso'],
-    n_thresholds=12   # maior granularidade = melhor ajuste
+    n_thresholds=5   # maior granularidade = melhor ajuste
 )
 clf.fit(X, y)
 param_grid = clf.get_param_grid()
