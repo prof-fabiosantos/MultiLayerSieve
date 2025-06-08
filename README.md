@@ -10,22 +10,53 @@ O **MultiLayer Sieve** é um algoritmo de classificação supervisionada inspira
 
 ## Algoritmo
 
-É um classificador multicamadas, onde cada camada corresponde a uma peneira com thresholds (tamanhos dos buracos) aprendíveis e alta interpretabilidade.
-Cada camada da peneira possui um conjunto de thresholds  de forma similar a malha de uma peneira física. As amostras são “triadas” camada por camada, de acordo com os thresholds de cada camada que são **ajustados automaticamente** para maximizar a performance nos dados de treino.
-
-* Cada camada da peneira tem um threshold para cada feature numérica.
-* Uma amostra é classificada em uma camada se todas as features forem menores que os thresholds daquela camada.
-* Amostras não classificadas seguem para a próxima camada; quem não é classificado em nenhuma recebe a última classe.
-* Os thresholds são aprendidos via busca em grade (`GridSearchCV`), garantindo flexibilidade e performance.
-* O modelo pode ser salvo/carregado (persistência total) e é integrado ao estilo scikit-learn.
+O **MultiLayer Sieve** é um algoritmo de classificação supervisionada inspirado no funcionamento físico das peneiras empilhadas. Cada camada corresponde a um conjunto de thresholds (malhas) — amostras são “triadas” camada por camada, de acordo com regras baseadas em valores numéricos simples. Os thresholds são ajustados automaticamente para maximizar a performance nos dados de treino.
 
 ---
-## Vantagens
 
-* **Explicável:** Decisões são 100% rastreáveis aos thresholds de cada camada.
-* **Flexível:** Número de camadas, features e granularidade dos thresholds são facilmente ajustáveis.
-* **Reutilizável:** Compatível com pipelines scikit-learn e persistência via joblib.
-* **Aplicável em contextos de triagem, inspeção e separação de grupos bem definidos por faixas numéricas.**
+## Formalização
+
+Cada amostra \$x \in \mathbb{R}^d\$ passa sequencialmente por camadas (peneiras) \$S\_k\$, onde cada camada aplica um teste de thresholds por feature:
+
+$$
+S_k(x) =
+\begin{cases}
+  c_k & \text{se } x_j < t_{k, j} \ \forall j \in [1, d] \\
+  \text{segue para próxima camada} & \text{caso contrário}
+\end{cases}
+$$
+
+* \$c\_k\$: classe atribuída na camada \$k\$
+* \$t\_{k, j}\$: threshold para a feature \$j\$ na camada \$k\$
+
+**Com intervalos (versão avançada):**
+
+$$
+S_k(x) =
+\begin{cases}
+  c_k & \text{se } t_{k,j}^{min} < x_j < t_{k,j}^{max} \ \forall j \in [1, d] \\
+  \text{segue para próxima camada} & \text{caso contrário}
+\end{cases}
+$$
+
+As amostras são processadas em sequência:
+
+$$
+x \xrightarrow{S_1} y_1 \xrightarrow{S_2} y_2 \dots \xrightarrow{S_K} \text{classe final}
+$$
+
+Em cada camada, se a condição for satisfeita, a classe \$c\_k\$ é atribuída e a triagem termina.
+Se não for satisfeita em nenhuma camada, a amostra recebe uma classe padrão (ex: "aprovado" ou última classe).
+
+### Pseudocódigo
+
+```python
+for k in range(K):
+    if all(x[j] < t_kj for j in range(d)):    # ou: if all(tmin_kj < x[j] < tmax_kj)
+        return c_k
+# Se não passou em nenhuma peneira
+return classe_padrao
+```
 
 ---
 
@@ -66,6 +97,7 @@ Embora exista uma grande variedade de algoritmos supervisionados para problemas 
 
 * **Qualquer contexto onde regras claras por faixas e etapas sejam valorizadas ou exigidas.**
 
+### Conclusão
 
 O MultiLayer Sieve não busca substituir métodos lineares clássicos, mas sim **preencher um nicho de aplicabilidade onde a explicação, a aderência ao processo e a transparência são mais importantes que a complexidade matemática ou a última fração de acurácia**.
 Sua principal força reside na facilidade de auditoria, adaptação a processos já existentes e ganho de confiança por parte dos usuários finais.
@@ -74,35 +106,13 @@ Sua principal força reside na facilidade de auditoria, adaptação a processos 
 
 ## Instalação
 
-Basta copiar o arquivo `MultiLayerSieve.py` para o seu projeto Python.
+Basta copiar o arquivo `learnable_sieve.py` para o seu projeto Python.
 É necessário ter `numpy`, `pandas` e `scikit-learn` instalados.
 
 ```bash
 pip install numpy pandas scikit-learn joblib
 ```
 
-## Hiperparâmetros
-
-O MultiLayer Sieve possui alguns hiperparâmetros que controlam sua lógica, flexibilidade e desempenho. Entender e ajustar esses parâmetros é fundamental para obter bons resultados e garantir interpretabilidade.
-Abaixo, explicamos cada um deles:
-
-* **n_layers**: número de camadas (“peneiras”) empilhadas no modelo.
-    O que faz: cada camada representa uma etapa de triagem, com thresholds próprios para cada feature.
-    Quanto mais camadas, mais refinada pode ser a separação entre classes.
-    Quando aumentar/diminuir: use mais camadas se seu problema tiver múltiplas faixas de classificação (ex: rejeitado, retrabalho, aprovado).
-    Use menos para casos binários ou mais simples.
-
-* **feature_ranges**: dicionário com o intervalo de valores a serem testados como thresholds para cada feature ({feature_name: array_de_valores}).
-   O que faz: permite customizar a busca dos melhores thresholds para cada feature.
-   Quando usar: se quiser controlar os possíveis valores de thresholds (por exemplo, para priorizar faixas específicas ou acelerar a busca).
-
-* **n_thresholds**: quantidade de valores a serem gerados automaticamente para cada feature ao criar os ranges de thresholds.
-   O que faz: define a granularidade da busca.
-   Valores mais altos → thresholds mais precisos, porém busca mais lenta
-   Valores mais baixos → thresholds menos precisos, mas busca mais rápida
-    
-    Dica:
-    Ajuste conforme o tamanho do seu dataset e o poder computacional disponível.
 ---
 
 ## Exemplo de Uso
@@ -150,11 +160,21 @@ if 'classe_verdadeira' in df_teste.columns:
 
 ---
 
+## Hiperparâmetros do MultiLayer Sieve
+
+| Hiperparâmetro      | Descrição / O que faz                                                                                                                                                                                                                                                                                                            | Quando usar / Dica                                                                                                                                                                                     |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **n\_layers**       | Número de camadas (“peneiras”) empilhadas no modelo.<br><br>**O que faz:**<br>- Cada camada representa uma etapa de triagem, com thresholds próprios para cada feature.<br>- Quanto mais camadas, mais refinada pode ser a separação entre classes.                                                                              | **Quando aumentar/diminuir:**<br>- Use mais camadas se seu problema tiver múltiplas faixas de classificação (ex: rejeitado, retrabalho, aprovado).<br>- Use menos para casos binários ou mais simples. |
+| **feature\_ranges** | Dicionário com o intervalo de valores a serem testados como thresholds para cada feature (`{feature_name: array_de_valores}`).<br><br>**O que faz:**<br>- Permite customizar a busca dos melhores thresholds para cada feature.                                                                                                  | **Quando usar:**<br>- Se quiser controlar os possíveis valores de thresholds (por exemplo, para priorizar faixas específicas ou acelerar a busca).                                                     |
+| **n\_thresholds**   | Quantidade de valores a serem gerados automaticamente para cada feature ao criar os ranges de thresholds.<br><br>**O que faz:**<br>- Define a granularidade da busca:<br>  • Valores mais altos → thresholds mais precisos, porém busca mais lenta<br>  • Valores mais baixos → thresholds menos precisos, mas busca mais rápida | **Dica:**<br>- Ajuste conforme o tamanho do seu dataset e o poder computacional disponível.                                                                                                            |
+
+---
+
 ## Estrutura dos arquivos
 
-* `MultiLayerSieve.py` — Implementação do classificador MultiLayer Sieve.
-* `Train.py` — Exemplo de script de treinamento.
-* `Test.py` — Exemplo de script de teste/avaliação.
+* `learnable_sieve.py` — Implementação do classificador MultiLayer Sieve.
+* `TrainMultiLayerSieve.py` — Exemplo de script de treinamento.
+* `TestMultiLayerSieve.py` — Exemplo de script de teste/avaliação.
 * `treino.csv`, `teste.csv` — Dados de exemplo (colunas: features numéricas + classe).
 
 ---
@@ -166,12 +186,6 @@ if 'classe_verdadeira' in df_teste.columns:
 * Melhor desempenho em problemas interpretáveis, datasets pequenos/médios ou prototipagem rápida.
 
 ---
-
-
-## 📘 Créditos
-
-📘 **Transformer Core** foi desenvolvido pelo Prof. [Fabio Santos](https://www.linkedin.com/in/fabio-santos-3706906/) da Universidade do Estado do Amazonas.
-
 
 ## Contribuindo
 
@@ -190,4 +204,5 @@ MIT
 ---
 
 > Dúvidas, sugestões ou exemplos de uso? Abra uma issue ou entre em contato!
+
 
