@@ -94,9 +94,9 @@ Abaixo, explicamos cada um deles:
 
 * **feature_ranges**: dicionário com o intervalo de valores a serem testados como thresholds para cada feature ({feature_name: array_de_valores}).
    O que faz: permite customizar a busca dos melhores thresholds para cada feature.
-   Quando usar:Se quiser controlar os possíveis valores de thresholds (por exemplo, para priorizar faixas específicas ou acelerar a busca).
+   Quando usar: se quiser controlar os possíveis valores de thresholds (por exemplo, para priorizar faixas específicas ou acelerar a busca).
 
- **n_thresholds**: quantidade de valores a serem gerados automaticamente para cada feature ao criar os ranges de thresholds.
+* **n_thresholds**: quantidade de valores a serem gerados automaticamente para cada feature ao criar os ranges de thresholds.
    O que faz: define a granularidade da busca.
    Valores mais altos → thresholds mais precisos, porém busca mais lenta
    Valores mais baixos → thresholds menos precisos, mas busca mais rápida
