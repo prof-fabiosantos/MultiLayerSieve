@@ -51,9 +51,16 @@ Se não for satisfeita em nenhuma camada, a amostra recebe uma classe padrão (e
 ### Pseudocódigo
 
 ```python
+# Percorre todas as camadas/peneiras do modelo (K é o número de camadas). Ex: Se K = 3, ele verifica a camada 0, depois a 1, depois a 2.
 for k in range(K):
-    if all(x[j] < t_kj for j in range(d)):    # ou: if all(tmin_kj < x[j] < tmax_kj)
-        return c_k
+    # Para a camada k, verifica todas as features (variáveis de entrada) da amostra x:
+    # x[j] < t_kj significa: O valor da feature j está abaixo do threshold da camada k para aquela feature.
+    # all(...) exige que essa condição seja verdadeira para todas as features da amostra.
+    # Versão com intervalos:
+    # tmin_kj < x[j] < tmax_kj — o valor da feature precisa cair dentro do intervalo permitido para aquela camada e feature (não só menor que o threshold, mas entre dois limites).
+    if all(x[j] < t_kj for j in range(d)): # ou: if all(tmin_kj < x[j] < tmax_kj)  
+        # Se a amostra x passou pelo filtro da camada k, então ela é classificada com a classe associada àquela camada (c_k), e a execução termina aqui para essa amostra.
+        return c_k 
 # Se não passou em nenhuma peneira
 return classe_padrao
 ```
