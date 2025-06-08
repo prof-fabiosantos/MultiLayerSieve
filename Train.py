@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import GridSearchCV
-from MultiLayerSieve import MultiLayerSieve
+from MultiLayerSieveClassic import MultiLayerSieveClassic
 import joblib
 
 # Ler dados de treino
@@ -9,7 +9,7 @@ X = df[['glicose', 'pressao', 'temperatura']].values
 y = df['classe_verdadeira'].values
 
 # Instanciar o classificador
-clf = MultiLayerSieve(
+clf = MultiLayerSieveClassic(
     n_layers=2,
     feature_names=['glicose', 'pressao', 'temperatura'],
     n_thresholds=5  # granularidade dos thresholds
