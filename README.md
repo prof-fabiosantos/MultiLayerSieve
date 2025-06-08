@@ -10,7 +10,7 @@ Cada camada da peneira possui um conjunto de thresholds  de forma similar a uma 
  
 ---
 
-## Lógica do Algoritmo
+## Algoritmo
 
 * Cada camada da peneira tem um threshold para cada feature numérica.
 * Uma amostra é classificada em uma camada se todas as features forem menores que os thresholds daquela camada.
@@ -81,7 +81,7 @@ Basta copiar o arquivo `MultiLayerSieve.py` para o seu projeto Python.
 pip install numpy pandas scikit-learn joblib
 ```
 
-## Hiperparâmetros do MultiLayer Sieve
+## Hiperparâmetros
 
 O MultiLayer Sieve possui alguns hiperparâmetros que controlam sua lógica, flexibilidade e desempenho. Entender e ajustar esses parâmetros é fundamental para obter bons resultados e garantir interpretabilidade.
 Abaixo, explicamos cada um deles:
