@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
-from MultiLayerSieve import MultiLayerSieve
+from MultiLayerSieveClassic import MultiLayerSieveClassic
 from sklearn.model_selection import GridSearchCV
 
 # Gerar dados: classe 0 se x < 0.3 e y < 0.7, senão classe 1
@@ -15,7 +15,7 @@ y = ((X[:,0] + X[:,1]) > 1).astype(int)
 X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y)
 
 # MultiLayer Sieve
-clf = MultiLayerSieve(
+clf = MultiLayerSieveClassic(
     n_layers=2,
     feature_names=['f1', 'f2'],
     n_thresholds=5
