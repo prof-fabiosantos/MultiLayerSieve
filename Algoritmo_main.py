@@ -1,3 +1,5 @@
+# Primeira versão do MultiLayerSieve
+
 def peneira_multicamadas(dados, thresholds):
     classes = []
     for valor in dados:
