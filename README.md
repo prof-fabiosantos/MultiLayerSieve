@@ -21,6 +21,13 @@ Cada camada da peneira possui um conjunto de thresholds  de forma similar a malh
 
 ---
 
+## Formalização
+
+<p align="center">
+  <img src="./forma.png" alt="Logo Transformer Core" width="300"/>
+</p>
+
+
 ## Vantagens
 
 * **Explicável:** Decisões são 100% rastreáveis aos thresholds de cada camada.
