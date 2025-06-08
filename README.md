@@ -1,8 +1,8 @@
 # MultiLayer Sieve
 
-Um classificador supervisionado baseado em peneiras multicamadas, com thresholds (malhas) aprendíveis e alta interpretabilidade.
 O **MultiLayer Sieve** é um algoritmo de classificação supervisionada inspirado no funcionamento físico das peneiras dos povos originários da Amazônia.
-Cada camada da peneira corresponde a um conjunto de thresholds — amostras são “triadas” camada por camada, de acordo com os thresholds de cada camada são **ajustados automaticamente** para maximizar a performance nos dados de treino.
+é um classificador multicamadas, onde uma cada corresponde a uma peneira com thresholds (malhas) aprendíveis e alta interpretabilidade.
+Cada camada da peneira possui um conjunto de thresholds  de forma similar a uma peneira física. As amostras são “triadas” camada por camada, de acordo com os thresholds de cada camada que são **ajustados automaticamente** para maximizar a performance nos dados de treino.
 
 <p align="center">
   <img src="./logo.png" alt="Logo Transformer Core" width="300"/>
