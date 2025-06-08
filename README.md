@@ -20,14 +20,6 @@ Cada camada da peneira possui um conjunto de thresholds  de forma similar a malh
 * O modelo pode ser salvo/carregado (persistência total) e é integrado ao estilo scikit-learn.
 
 ---
-
-## Formalização
-
-<p align="center">
-  <img src="./forma.png" alt="Logo Transformer Core" width="300"/>
-</p>
-
-
 ## Vantagens
 
 * **Explicável:** Decisões são 100% rastreáveis aos thresholds de cada camada.
