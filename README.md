@@ -168,6 +168,12 @@ if 'classe_verdadeira' in df_teste.columns:
 
 ---
 
+
+## 📘 Créditos
+
+📘 **Transformer Core** foi desenvolvido pelo Prof. [Fabio Santos](https://www.linkedin.com/in/fabio-santos-3706906/) da Universidade do Estado do Amazonas.
+
+
 ## Contribuindo
 
 Sinta-se livre para propor melhorias, sugerir issues, ou criar pull requests para:
