@@ -3,7 +3,7 @@
 import numpy as np
 from sklearn.base import BaseEstimator, ClassifierMixin
 
-class MultiLayerSieve(BaseEstimator, ClassifierMixin):
+class MultiLayerSieveClassic(BaseEstimator, ClassifierMixin):
     """
     Classificador tipo peneira multicamadas.
     Gera os ranges automaticamente se não forem informados pelo usuário.
