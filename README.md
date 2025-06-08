@@ -114,6 +114,11 @@ Sua principal força reside na facilidade de auditoria, adaptação a processos 
 ## Instalação
 
 ```bash
+# Criar e ativar o ambiente virtual
+python -m venv myenv
+.\myenv\Scripts\activate
+
+# Instalar as Depedências
 pip install numpy pandas scikit-learn joblib
 ```
 ---
