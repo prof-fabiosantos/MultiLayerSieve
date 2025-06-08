@@ -87,34 +87,31 @@ O MultiLayer Sieve possui alguns hiperparâmetros que controlam sua lógica, fle
 Abaixo, explicamos cada um deles:
 
 * n_layers: Número de camadas (“peneiras”) empilhadas no modelo.
-
-O que faz:
-Cada camada representa uma etapa de triagem, com thresholds próprios para cada feature.
-Quanto mais camadas, mais refinada pode ser a separação entre classes.
-
-Quando aumentar/diminuir:
-Use mais camadas se seu problema tiver múltiplas faixas de classificação (ex: rejeitado, retrabalho, aprovado).
-Use menos para casos binários ou mais simples.
+    O que faz:
+    Cada camada representa uma etapa de triagem, com thresholds próprios para cada feature.
+    Quanto mais camadas, mais refinada pode ser a separação entre classes.
+  
+    Quando aumentar/diminuir:
+    Use mais camadas se seu problema tiver múltiplas faixas de classificação (ex: rejeitado, retrabalho, aprovado).
+    Use menos para casos binários ou mais simples.
 
 * feature_ranges: Dicionário com o intervalo de valores a serem testados como thresholds para cada feature ({feature_name: array_de_valores}).
-
-O que faz:
-Permite customizar a busca dos melhores thresholds para cada feature.
-
-Quando usar:
-Se quiser controlar os possíveis valores de thresholds (por exemplo, para priorizar faixas específicas ou acelerar a busca).
+    O que faz:
+    Permite customizar a busca dos melhores thresholds para cada feature.
+    
+    Quando usar:
+    Se quiser controlar os possíveis valores de thresholds (por exemplo, para priorizar faixas específicas ou acelerar a busca).
 
 * n_thresholds: Quantidade de valores a serem gerados automaticamente para cada feature ao criar os ranges de thresholds.
-
-O que faz:
-Define a granularidade da busca:
-
-Valores mais altos → thresholds mais precisos, porém busca mais lenta
-
-Valores mais baixos → thresholds menos precisos, mas busca mais rápida
-
-Dica:
-Ajuste conforme o tamanho do seu dataset e o poder computacional disponível.
+    O que faz:
+    Define a granularidade da busca:
+    
+    Valores mais altos → thresholds mais precisos, porém busca mais lenta
+    
+    Valores mais baixos → thresholds menos precisos, mas busca mais rápida
+    
+    Dica:
+    Ajuste conforme o tamanho do seu dataset e o poder computacional disponível.
 ---
 
 ## Exemplo de Uso
