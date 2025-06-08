@@ -113,9 +113,6 @@ Sua principal força reside na facilidade de auditoria, adaptação a processos 
 
 ## Instalação
 
-Basta copiar o arquivo `learnable_sieve.py` para o seu projeto Python.
-É necessário ter `numpy`, `pandas` e `scikit-learn` instalados.
-
 ```bash
 pip install numpy pandas scikit-learn joblib
 ```
@@ -131,11 +128,10 @@ pip install numpy pandas scikit-learn joblib
 
 ---
 
-## Estrutura dos arquivos
+## Estrutura de diretórios
 
-* `learnable_sieve.py` — Implementação do classificador MultiLayer Sieve.
-* `TrainMultiLayerSieve.py` — Exemplo de script de treinamento.
-* `TestMultiLayerSieve.py` — Exemplo de script de teste/avaliação.
+* `MultiLayerSieveClassic` — Contem a implementação do MultiLayerSieveClassic, scripts pra treinamento e teste.
+* `MultiLayerSieveInteval` — Contem a implementação do MultiLayerSieveInteval, scripts pra treinamento e teste.
 * `treino.csv`, `teste.csv` — Dados de exemplo (colunas: features numéricas + classe).
 
 ---
