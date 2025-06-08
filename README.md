@@ -29,6 +29,7 @@ $$
 * \$c\_k\$: classe atribuída na camada \$k\$
 * \$t\_{k, j}\$: threshold para a feature \$j\$ na camada \$k\$
 
+
 **Com intervalos (versão avançada):**
 
 $$
