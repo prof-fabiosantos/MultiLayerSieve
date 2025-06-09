@@ -150,7 +150,6 @@ pip install numpy pandas scikit-learn joblib
 
 ## Limitações
 
-* **Não recomendado para relações altamente não-lineares**.
 * GridSearch pode ser custoso para muitos features/camadas/thresholds.
 * Melhor desempenho em problemas interpretáveis, datasets pequenos/médios ou prototipagem rápida.
 
