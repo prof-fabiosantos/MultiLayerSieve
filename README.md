@@ -111,7 +111,7 @@ Embora exista uma grande variedade de algoritmos supervisionados para problemas 
 
 * **Qualquer contexto onde regras claras por faixas e etapas sejam valorizadas ou exigidas.**
 
-O MultiLayer Sieve não busca substituir métodos lineares clássicos, mas sim **preencher um nicho de aplicabilidade onde a explicação, a aderência ao processo e a transparência são mais importantes que a complexidade matemática ou a última fração de acurácia**.
+O MultiLayer Sieve não busca substituir algoritmos clássicos, mas sim **preencher um nicho de aplicabilidade onde a explicação, a aderência ao processo e a transparência são mais importantes que a complexidade matemática ou a última fração de acurácia**.
 Sua principal força reside na facilidade de auditoria, adaptação a processos já existentes e ganho de confiança por parte dos usuários finais.
 
 ---
