@@ -10,11 +10,11 @@ O **MultiLayer Sieve** é um algoritmo de classificação supervisionada inspira
 
 ## Algoritmo
 
-O **MultiLayer Sieve** é um algoritmo de classificação supervisionada inspirado no funcionamento físico das peneiras empilhadas. Cada camada corresponde a um conjunto de thresholds (malhas) — amostras são “triadas” camada por camada, de acordo com regras baseadas em valores numéricos simples. Os thresholds são ajustados automaticamente para maximizar a performance nos dados de treino.
+O **MultiLayer Sieve** é um algoritmo de classificação supervisionada inspirado no funcionamento físico das peneiras empilhadas. Cada camada por corresponder a um conjunto de thresholds (malhas) ou a regiões definidas por intervalos — amostras são “triadas” camada por camada, de acordo com abordagem usada. 
 
 O **MultiLayer Sieve** possui duas versões: MultiLayerSieveClassic, MultiLayerSieveInterval.
 
-* O MultiLayerSieveClassic é um classificador que utiliza, em cada camada, apenas um threshold superior para cada variável de entrada, criando regiões de decisão que sempre começam no mínimo dos dados e vão até o limite imposto pelos thresholds, formando retângulos “colados” nos cantos do espaço de atributos.
+* O MultiLayerSieveClassic é um classificador que utiliza, em cada camada, apenas um threshold superior para cada variável de entrada, criando regiões de decisão que sempre começam no mínimo dos dados e vão até o limite imposto pelos thresholds, formando retângulos “colados” nos cantos do espaço de atributos. Os thresholds são ajustados automaticamente para maximizar a performance nos dados de treino.
 * Já o MultiLayerSieveInterval é mais flexível, pois cada camada define intervalos com limites inferior e superior para cada variável, permitindo criar regiões internas em qualquer posição do espaço de atributos, como “caixas” flutuantes. Assim, enquanto o Classic só consegue separar regiões adjacentes ao zero ou ao mínimo das variáveis, o Interval pode isolar subconjuntos internos, tornando-o mais expressivo para capturar padrões que não estejam apenas nas bordas do espaço de dados.
 
 ---
